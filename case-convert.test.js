@@ -1,5 +1,5 @@
 const toLowerCamelCase = (kebabCase) => {
-  if (kebabCase === undefined) {
+  if (kebabCase === undefined || kebabCase === "") {
     return "You must provide some text";
   }
   let lowerCamelCase = kebabCase.split("");
@@ -77,6 +77,15 @@ describe("function toLowerCamelCase", () => {
 
   test("when function toLowerCamelCase doesn't receive an input, it should return 'You must provide some text'", () => {
     const data = undefined;
+    const expected = "You must provide some text";
+
+    const result = toLowerCamelCase(data);
+
+    expect(result).toBe(expected);
+  });
+
+  test("when function toLowerCamelCase doesn't receive an input, it should return 'You must provide some text'", () => {
+    const data = "";
     const expected = "You must provide some text";
 
     const result = toLowerCamelCase(data);
