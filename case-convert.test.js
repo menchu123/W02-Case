@@ -1,3 +1,23 @@
+const toLowerCamelCase = (kebabCase) => {
+  if (kebabCase === undefined) {
+    return "You must provide some text";
+  }
+  let lowerCamelCase = kebabCase.split("");
+  for (let i = 0; i < lowerCamelCase.length; i++) {
+    if (lowerCamelCase[i] === "-") {
+      lowerCamelCase[i + 1] = lowerCamelCase[i + 1].toUpperCase();
+      lowerCamelCase.splice(i, 1);
+    } else if (lowerCamelCase[i] === "_") {
+      return "The text contains underscores";
+    } else if (lowerCamelCase[i] === lowerCamelCase[i].toUpperCase()) {
+      return "The text contains capital letters";
+    }
+  }
+  return lowerCamelCase.join("");
+};
+
+console.log(toLowerCamelCase("que_pasa"));
+
 describe("function toLowerCamelCase", () => {
   test("when function toLowerCamelCase receives 'hola-que-tal', it should return 'holaQueTal'", () => {
     const data = "hola-que-tal";
@@ -36,6 +56,7 @@ describe("function toLowerCamelCase", () => {
   });
 
   test("when function toLowerCamelCase doesn't receive an input, it should return 'You must provide some text'", () => {
+    const data = undefined;
     const expected = "You must provide some text";
 
     const result = toLowerCamelCase(data);
