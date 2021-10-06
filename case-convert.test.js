@@ -16,8 +16,6 @@ const toLowerCamelCase = (kebabCase) => {
   return lowerCamelCase.join("");
 };
 
-console.log(toLowerCamelCase("que_pasa"));
-
 describe("function toLowerCamelCase", () => {
   test("when function toLowerCamelCase receives 'hola-que-tal', it should return 'holaQueTal'", () => {
     const data = "hola-que-tal";
