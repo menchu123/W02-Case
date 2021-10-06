@@ -5,8 +5,12 @@ const toLowerCamelCase = (kebabCase) => {
   let lowerCamelCase = kebabCase.split("");
   for (let i = 0; i < lowerCamelCase.length; i++) {
     if (lowerCamelCase[i] === "-") {
-      lowerCamelCase[i + 1] = lowerCamelCase[i + 1].toUpperCase();
-      lowerCamelCase.splice(i, 1);
+      if (lowerCamelCase[i + 1] === lowerCamelCase[i + 1].toUpperCase()) {
+        return "The text contains capital letters";
+      } else {
+        lowerCamelCase[i + 1] = lowerCamelCase[i + 1].toUpperCase();
+        lowerCamelCase.splice(i, 1);
+      }
     } else if (lowerCamelCase[i] === "_") {
       return "The text contains underscores";
     } else if (lowerCamelCase[i] === lowerCamelCase[i].toUpperCase()) {
@@ -26,9 +30,27 @@ describe("function toLowerCamelCase", () => {
     expect(result).toBe(expected);
   });
 
+  test("when function toLowerCamelCase receives 'this-is-now-camel-case', it should return 'ThisIsNowCamelCase'", () => {
+    const data = "this-is-now-camel-case";
+    const expected = "thisIsNowCamelCase";
+
+    const result = toLowerCamelCase(data);
+
+    expect(result).toBe(expected);
+  });
+
   test("when function toLowerCamelCase receives 'testing-function', it should return 'testingFunction'", () => {
     const data = "testing-function";
     const expected = "testingFunction";
+
+    const result = toLowerCamelCase(data);
+
+    expect(result).toBe(expected);
+  });
+
+  test("when function toLowerCamelCase receives 'esto-Es-erroneo', it should return 'The text contains capital letters'", () => {
+    const data = "esto-Es-erronEo";
+    const expected = "The text contains capital letters";
 
     const result = toLowerCamelCase(data);
 
